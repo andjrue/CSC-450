@@ -9,7 +9,7 @@ Part 2. Modify the code so that 40 models are built: one for each degree polynom
         On Page 33, the author created 5 separate variables for each model: fb1, fb2, fb3, fb10, and fb100.
         Instead, create a list of polynomial models. This will make the next two parts a bit easier.
 
-        I think this is done?
+        DONE
 
 Part 3. Create a list of total errors, one for each polynomial model.
         Use this list to create a graph (using matplotlib) with polynomial degree on the x axis and total error on the y axis.

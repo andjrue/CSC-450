@@ -71,7 +71,7 @@ max = fsolve(ans - 100000, x0=800) # I ran into some weird tupling problem here 
 reached_max = max[0] / (7 * 24)
 
 
-print(f"On average, web hits will hit 100,000 per day in {reached_max} weeks ")
+print(f"Web hits will hit 100,000 per day in {reached_max} weeks")
 
 
 
@@ -116,7 +116,7 @@ def plot_web_traffic(x, y, models=None, mx=None, ymax=None):
     plt.ylim(ymax=ymax)
   plt.grid()
   plt.ylim(ymin=0)
-  # plt.show()
+  plt.show()
 
 plot_web_traffic(x, y, [ans], mx=np.linspace(0, 6 * 7 * 24, 100), ymax=10000)
 
