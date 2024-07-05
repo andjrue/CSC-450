@@ -62,20 +62,6 @@ ans = np.poly1d(np.polyfit(xb[train], yb[train], 3))
 
 # print(ans)
 
-"""
-avg_weeks = []
-for model in range(1000):
-  frac = .3
-  split_idx = int(frac * len(xb))
-  shuffled = np.random.permutation(list(range(len(xb))))
-  train = sorted(shuffled[split_idx:])
-  ans = np.poly1d(np.polyfit(xb[train], yb[train], 3))
-  max = fsolve(ans - 100000, x0 = 800)
-  reached_max = max[0] / (7 * 24)
-  avg_weeks.append(reached_max)
-
-# print(avg_weeks)
-"""
 max = fsolve(ans - 100000, x0=800) # I ran into some weird tupling problem here and wasn't able to do it exactly as the book has it.
                                    # From what I can tell, the math seems ok. The answer is reasonable, anyway.
 
