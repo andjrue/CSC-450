@@ -14,7 +14,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import fsolve
 
-data = np.genfromtxt("test_traffic.tsv", delimiter="\t")
+data = np.genfromtxt("web_traffic.tsv", delimiter="\t")
 
 x = data[:,0]
 y = data[:,1]
@@ -48,19 +48,34 @@ Although it's not a completely fair test, it at least produces consistent result
 would reflect in the model.
 
 With the current setup, it's expected we hit 100k web hits in ~8.6 weeks. I think that's a fair estimate.
+
+You could also use random sampling like they do in the example, but then average it over 1000 runs. Pretty cool.
 """
 
 start_idx = 0
-# print("Starting Index: ", start_idx)
 end_idx = int(len(xb))
-# print("Ending Index: ", end_idx)
 
 train = np.arange(start_idx, end_idx)
 # print(train)
 
-ans = np.poly1d(np.polyfit(xb[train], yb[train], 2))
+ans = np.poly1d(np.polyfit(xb[train], yb[train], 3))
+
 # print(ans)
 
+"""
+avg_weeks = []
+for model in range(1000):
+  frac = .3
+  split_idx = int(frac * len(xb))
+  shuffled = np.random.permutation(list(range(len(xb))))
+  train = sorted(shuffled[split_idx:])
+  ans = np.poly1d(np.polyfit(xb[train], yb[train], 3))
+  max = fsolve(ans - 100000, x0 = 800)
+  reached_max = max[0] / (7 * 24)
+  avg_weeks.append(reached_max)
+
+# print(avg_weeks)
+"""
 max = fsolve(ans - 100000, x0=800) # I ran into some weird tupling problem here and wasn't able to do it exactly as the book has it.
                                    # From what I can tell, the math seems ok. The answer is reasonable, anyway.
 
@@ -69,7 +84,8 @@ max = fsolve(ans - 100000, x0=800) # I ran into some weird tupling problem here 
 
 reached_max = max[0] / (7 * 24)
 
-print(f"100,000 hits per hour expected at week {reached_max}")
+
+print(f"On average, web hits will hit 100,000 per day in {reached_max} weeks ")
 
 
 
