@@ -31,12 +31,35 @@ Turn in your responses, graphs, and Python code to the Homework 1 submission fol
 
 """
 
+import numpy as np
+from matplotlib.lines import lineStyles
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import fsolve
+
+data = np.genfromtxt("test_traffic.tsv", delimiter="\t")
+
+x, y = data[:,0], data[:,1]
+
+x, y = x[~np.isnan(y)], y[~np.isnan(y)]
+
+inflection = int(3.5 * 7 * 24) # We're going to use the inflection point again. Otherwise, the models might not get to 100k.
+
+xb, yb = x[inflection:], y[inflection:]
+
 models = []
-strang = "model_"
 mod_num = 0
 
-for i in range(40):
+for model in range(40):
   mod_num += 1
-  models.append(strang + str(mod_num))
+  model = np.poly1d(np.polyfit(xb, yb, mod_num))
+  models.append(model)
 
-print(models)
+# print(models) - This seems ok?
+
+
+
+
+
+def get_error(f, x, y):
+  return np.sum((f(x) - y) ** 2)
