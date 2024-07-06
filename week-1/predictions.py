@@ -62,13 +62,13 @@ ans = np.poly1d(np.polyfit(xb[train], yb[train], 3))
 
 # print(ans)
 
-max = fsolve(ans - 100000, x0=800) # I ran into some weird tupling problem here and wasn't able to do it exactly as the book has it.
+initial_max = fsolve(ans - 100000, x0=800) # I ran into some weird tupling problem here and wasn't able to do it exactly as the book has it.
                                    # From what I can tell, the math seems ok. The answer is reasonable, anyway.
 
                                    # Update! I took the same sample data from the books repo and used that. Although I couldn't get the same answer.
                                    # my results did seem like they were within reason. This is because the book is taking a random sample of data.
 
-reached_max = max[0] / (7 * 24)
+reached_max = initial_max[0] / (7 * 24)
 
 
 print(f"Web hits will hit 100,000 per day in {reached_max} weeks")

@@ -14,8 +14,12 @@ Part 2. Modify the code so that 40 models are built: one for each degree polynom
 Part 3. Create a list of total errors, one for each polynomial model.
         Use this list to create a graph (using matplotlib) with polynomial degree on the x axis and total error on the y axis.
 
+        DONE
+
 Part 4. Create a list of predicted lengths of time to reach 100,000 hits/hour, as predicted using each model.
         Use this list to create a graph (using matplotlib) with polynomial degree on the x axis, and predicted time on the y axis.
+
+        DONE
 
 Part 5. Use your graphs to answer the following questions. As a rough guide of how in-depth your answers should be, all three should total about half a page to a page.
         If you find yourself writing more than a page, you are likely going into more detail than is required. If you write significantly less, you should probably expand on your points.

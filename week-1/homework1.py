@@ -22,7 +22,7 @@ for model in range(1, 41):
   model = np.poly1d(np.polyfit(xb, yb, mod_num))
   models.append(model)
 
-# print(models) - This seems ok?
+# print(models) - This seems ok
 
 def get_error(f, x, y):
   return np.sum((f(x) - y) ** 2)
@@ -43,23 +43,34 @@ end_idx = int(len(xb))
 train = np.arange(start_idx, end_idx)
 # print(train)
 
-def hit_100k(arr, training_slice, x, y):
+def hit_100k(models, training_slice, x, y):
   model_number = 0
-  arr = []
+  time_to_100k = []
 
-  for i in arr:
+  for i in models:
     model_number += 1
 
-    ans = np.poly1d(np.polyfit(xb[train], yb[train], model_number))
+    ans = np.poly1d(np.polyfit(x[train], y[train], model_number))
 
     max = fsolve(ans - 100000, x0=800)
     reached_max = max[0] / (7 * 24)
 
-    arr.append(reached_max)
+    time_to_100k.append(reached_max)
 
-  return arr
 
-hit_100k(models, train, xb, yb) # START HERE
+  print(time_to_100k)
+  return time_to_100k
+
+def plot100k(times):
+  plt.figure(figsize=(12,6))
+  plt.scatter(range(1, 41), times)
+
+  plt.title("Time to Hit 100k Web Hits")
+  plt.xlabel("Polynomial Degree")
+  plt.ylabel("Predicted Time")
+  plt.xticks(range(1, 41))
+
+  plt.show()
 
 def plot_error(arr):
 
@@ -73,13 +84,10 @@ def plot_error(arr):
 
   plt.show()
 
-
-def plot_100k(arr, )
-
-
-
-
-
-
-
+time_to_100k = hit_100k(models, train, xb, yb)
 plot_error(model_error)
+plot100k(time_to_100k)
+
+"""
+This seems to be working. I ran the first 3 models through predictions.py to get a baseline and the math matches.
+"""
