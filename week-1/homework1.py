@@ -43,7 +43,7 @@ end_idx = int(len(xb))
 train = np.arange(start_idx, end_idx)
 # print(train)
 
-def hit_100k(models, training_slice, x, y):
+def hit_100k(models, train, x, y):
   model_number = 0
   time_to_100k = []
 
